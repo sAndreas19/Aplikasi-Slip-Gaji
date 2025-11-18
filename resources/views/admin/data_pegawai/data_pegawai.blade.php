@@ -1,7 +1,7 @@
 @include('templates_admin.header', ['title' => $title ?? 'Dashboard'])
 
 @include('templates_admin.sidebar', ['title' => $title ?? 'Dashboard'])
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-bottom: 100px;">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">{{ $title ?? 'Dashboard' }}</h1>
 
@@ -32,7 +32,7 @@
                     <td class="text-centered">{{ $pegawai->jabatan }}</td>
                     <td class="text-centered">{{ $pegawai->tanggal_masuk }}</td>
                     <td class="text-centered">{{ $pegawai->status }}</td>
-                    <td class="text-centered"><img style="max-width: 60px; height: 60px;" src="{{ asset('uploads/pegawai/'.$pegawai->photo) }}" alt=""></td>
+                    <td class="text-centered"><img style="max-width: 60px; height: 60px;" src="{{ asset('storage/'.$pegawai->photo) }}" alt=""></td>
                     <td class="text-centered">
                         <a href="{{ route('admin.data_pegawai.edit', $pegawai->id_pegawai) }}" class="btn btn-warning btn-sm">Edit <i class="fas fa-edit"></i></a>
                         <!-- /update_data'.pegawai->id_pegawai -->

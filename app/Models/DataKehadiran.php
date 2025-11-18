@@ -13,7 +13,7 @@ class DataKehadiran extends Model
     protected $fillable = [
         'bulan',
         'nik',
-        'nama_karyawan',
+        'nama_pegawai',
         'jenis_kelamin',
         'nama_jabatan',
         'hadir',

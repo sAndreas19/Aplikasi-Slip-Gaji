@@ -12,9 +12,17 @@
         <div class="card" style="width: 60%; margin-bottom: 100px;">
             <div class="card-body">
 
-                <form method="POST" action="{{ route('admin.data_pegawai.update', $pegawai-> id_pegawai) }}">
+                <form method="POST" action="{{ route('admin.data_pegawai.update', $pegawai-> id_pegawai) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <div class="form-group">
+                        <label for="nik">NIK</label>
+                        <input type="text" name="nik" class="form-control" value="{{ old('nik', $pegawai->nik) }}" required>
+                        @error('nik')
+                            <div class="text-small text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="form-group">
                         <label for="nama_pegawai">Nama Pegawai</label>
                         <input type="text" name="nama_pegawai" class="form-control" value="{{ old('nama_pegawai', $pegawai->nama_pegawai) }}" required>
@@ -24,25 +32,54 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="gaji_pokok">Gaji Pokok</label>
-                        <input type="number" name="gaji_pokok" class="form-control" value="{{ old('gaji_pokok', $pegawai->gaji_pokok) }}" required>
-                        @error('gaji_pokok')
-                            <div class="text-small text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="uang_transport">Uang Transport</label>
-                        <input type="number" name="uang_transport" class="form-control" value="{{ old('uang_transport', $pegawai->uang_transport) }}" required>
-                        @error('uang_transport')
+                        <label for="jenis_kelamin">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" class="form-control">
+                            <option value="{{ old('jenis_kelamin', $pegawai->jenis_kelamin) }}">{{ old('jenis_kelamin', $pegawai->jenis_kelamin) }}</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                        @error('jenis_kelamin')
                             <div class="text-small text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="uang_makan">Uang Makan</label>
-                        <input type="number" name="uang_makan" class="form-control" value="{{ old('uang_makan', $pegawai->uang_makan) }}" required>
-                        @error('uang_makan')
+                        <label for="jabatan">Jabatan</label>
+                        <select name="jabatan" class="form-control">
+                            <option value="{{ old('jabatan', $pegawai->jabatan) }}">{{ old('jabatan', $pegawai->jabatan) }}</option>
+                            @foreach ($jabatans as $jabatan)
+                            <option value="{{ $jabatan->nama_jabatan }}">{{ $jabatan->nama_jabatan }}</option>
+                            @endforeach
+                        </select>
+                        @error('jabatan')
+                            <div class="text-small text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tanggal_masuk">Tanggal Masuk</label>
+                        <input type="date" name="tanggal_masuk" class="form-control" value="{{ old('tanggal_masuk', $pegawai->tanggal_masuk) }}" required>
+                        @error('tanggal_masuk')
+                            <div class="text-small text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select name="status" class="form-control">
+                            <option value="{{ old('status', $pegawai->status) }}">{{ old('status', $pegawai->status) }}</option>
+                            <option value="Pegawai Tetap">Pegawai Tetap</option>
+                            <option value="Pegawai Tidak Tetap">Pegawai Tidak Tetap</option>
+                        </select>
+                        @error('status')
+                            <div class="text-small text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photo">Upload Foto</label>
+                        <input type="file" name="photo" class="form-control">
+                        @error('photo')
                             <div class="text-small text-danger">{{ $message }}</div>
                         @enderror
                     </div>

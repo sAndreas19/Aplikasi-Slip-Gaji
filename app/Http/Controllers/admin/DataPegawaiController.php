@@ -41,22 +41,12 @@ class DataPegawaiController extends Controller
         ]);
 
         if ($request->hasFile('photo')) {
-        $file = $request->file('photo');
-        $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME))
-                    . '.' . $file->getClientOriginalExtension();
-
-        // simpan dan dapatkan path relatif (photos/xxxx.jpg)
-        $path = $file->storeAs('photos', $filename, 'public');
-
-        // masukkan ke array validated untuk disimpan di DB
-        $validated['photo'] = $path;
-    }
-
-        if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/pegawai'), $filename);
-            $validated['photo'] = $filename;
+            $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME))
+                        . '.' . $file->getClientOriginalExtension();
+
+            $path = $file->storeAs('pegawai', $filename, 'public');
+            $validated['photo'] = $path;
         }
 
         DataPegawai::create($validated);
@@ -66,9 +56,12 @@ class DataPegawaiController extends Controller
 
     public function edit(DataPegawai $dataPegawai)
     {
-        return view('admin.data_pegawai.edit', [
+        $jabatans = \App\Models\DataJabatan::all();
+
+        return view('admin.data_pegawai.update_data', [
             'title' => 'Edit Pegawai',
-            'pegawai' => $dataPegawai
+            'pegawai' => $dataPegawai,
+            'jabatans' => $jabatans,
         ]);
     }
 
@@ -85,7 +78,6 @@ class DataPegawaiController extends Controller
         ]);
 
         if ($request->hasFile('photo')) {
-        // hapus file lama jika ada
             if ($dataPegawai->photo && Storage::disk('public')->exists($dataPegawai->photo)) {
                 Storage::disk('public')->delete($dataPegawai->photo);
             }
@@ -94,7 +86,7 @@ class DataPegawaiController extends Controller
             $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME))
                         . '.' . $file->getClientOriginalExtension();
 
-            $path = $file->storeAs('photos', $filename, 'public');
+            $path = $file->storeAs('pegawai', $filename, 'public');
             $validated['photo'] = $path;
         }
 
@@ -106,7 +98,7 @@ class DataPegawaiController extends Controller
     public function destroy(DataPegawai $dataPegawai)
     {
         if ($dataPegawai->photo && Storage::disk('public')->exists($dataPegawai->photo)) {
-        Storage::disk('public')->delete($dataPegawai->photo);
+            Storage::disk('public')->delete($dataPegawai->photo);
         }
 
         $dataPegawai->delete();

@@ -46,6 +46,16 @@ Route::delete('/admin/data-jabatan/{dataJabatan}', [DataJabatanController::class
 
 Route::get('/admin/data-kehadiran', [DataKehadiranController::class, 'index'])
     ->name('admin.data_kehadiran');
+Route::get('/admin/data-kehadiran/create', [DataKehadiranController::class, 'create'])
+    ->name('admin.data_kehadiran.create');
+Route::post('/admin/data-kehadiran', [DataKehadiranController::class, 'store'])
+    ->name('admin.data_kehadiran.store');
+Route::get('/admin/data-kehadiran/{dataKehadiran}/edit', [DataKehadiranController::class, 'edit'])
+    ->name('admin.data_kehadiran.edit');
+Route::put('/admin/data-kehadiran/{dataKehadiran}', [DataKehadiranController::class, 'update'])
+    ->name('admin.data_kehadiran.update');
+Route::delete('/admin/data-kehadiran/{dataKehadiran}', [DataKehadiranController::class, 'destroy'])
+    ->name('admin.data_kehadiran.destroy');
 
 Route::get('/admin/data-gaji', [DataGajiController::class, 'index'])
     ->name('admin.data_gaji');
