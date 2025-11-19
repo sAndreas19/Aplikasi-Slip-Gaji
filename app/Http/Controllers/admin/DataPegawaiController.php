@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DataPegawaiController extends Controller
 {
-    public function index()
+    public function index() 
     {
         $pegawais = DataPegawai::all();
         return view('admin.data_pegawai.data_pegawai', [

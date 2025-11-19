@@ -58,6 +58,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('admin.data_kehadiran') }}">Data Absensi</a>
+                        <a class="collapse-item" href="{{ route('admin.potongan_gaji') }}">Potongan Gaji</a>
                         <a class="collapse-item" href="{{ route('admin.data_gaji') }}">Data Gaji</a>
                     </div>
                 </div>

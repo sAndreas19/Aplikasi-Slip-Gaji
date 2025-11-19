@@ -16,7 +16,7 @@ class DataKehadiranController extends Controller
     public function __construct()
     {
         $tahunSekarang = date('Y');
-        $this->daftarTahun = range(2020, $tahunSekarang);
+        $this->daftarTahun = range($tahunSekarang - 5, $tahunSekarang);
         $this->daftarBulan = [
             '01' => 'Januari',
             '02' => 'Februari',

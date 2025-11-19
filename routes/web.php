@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DataKehadiranController;
 use App\Http\Controllers\Admin\DataGajiController;
 use App\Http\Controllers\Admin\LaporanGajiController;
 use App\Http\Controllers\Admin\LaporanKehadiranController;
+use App\Http\Controllers\Admin\PotonganGajiController;
 use App\Http\Controllers\Admin\SlipGajiController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,8 +58,23 @@ Route::put('/admin/data-kehadiran/{dataKehadiran}', [DataKehadiranController::cl
 Route::delete('/admin/data-kehadiran/{dataKehadiran}', [DataKehadiranController::class, 'destroy'])
     ->name('admin.data_kehadiran.destroy');
 
+Route::get('/admin/potongan-gaji', [PotonganGajiController::class, 'index'])
+    ->name('admin.potongan_gaji');
+Route::get('/admin/potongan-gaji/create', [PotonganGajiController::class, 'create'])
+    ->name('admin.potongan_gaji.create');
+Route::post('/admin/potongan-gaji', [PotonganGajiController::class, 'store'])
+    ->name('admin.potongan_gaji.store');
+Route::get('/admin/potongan-gaji/{potonganGaji}/edit', [PotonganGajiController::class, 'edit'])
+    ->name('admin.potongan_gaji.edit');
+Route::put('/admin/potongan-gaji/{potonganGaji}', [PotonganGajiController::class, 'update'])
+    ->name('admin.potongan_gaji.update');
+Route::delete('/admin/potongan-gaji/{potonganGaji}', [PotonganGajiController::class, 'destroy'])
+    ->name('admin.potongan_gaji.destroy');
+
 Route::get('/admin/data-gaji', [DataGajiController::class, 'index'])
     ->name('admin.data_gaji');
+Route::get('/admin/data-gaji/cetak', [DataGajiController::class, 'cetakDataGaji'])
+    ->name('admin.data_gaji.print');
 
 Route::get('/admin/laporan-gaji', [LaporanGajiController::class, 'index'])
     ->name('admin.laporan_gaji');
